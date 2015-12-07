@@ -1,0 +1,12 @@
+# Build the volumes
+docker build -t pg_data .
+# Run the image and name
+docker run --name=pg_data pg_data
+#
+#
+# Docker Run for init
+docker run --name postgres --volumes-from pg_data \
+  -e POSTGRES_DATABASE=keycloak \
+  -e POSTGRES_USER=keycloak -e POSTGRES_PASSWORD=password  \
+  -e POSTGRES_ROOT_PASSWORD=root_password  postgres
+

@@ -1,0 +1,29 @@
+db:
+  image: postgres
+  volumes_from:
+    - pg_data
+  ports:
+    - "5432:5432"
+  expose:
+    - "5432"
+  environment:
+    - POSTGRES_DATABASE=keycloak
+    - POSTGRES_USER=keycloak
+    - POSTGRES_PASSWORD=password
+    - POSTGRES_ROOT_PASSWORD=root_password
+pg_data:
+  image: pg_data
+
+keycloak:
+  image: jboss/keycloak-postgres
+  ports:
+     - "8080:8080"
+  expose:
+     - "8080"
+  links:
+     - db:postgres
+  environment:
+     - POSTGRES_USER=keycloak
+     - POSTGRES_PASSWORD=password
+     - POSTGRES_DATABASE=keycloak
+

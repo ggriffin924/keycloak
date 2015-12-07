@@ -1,0 +1,6 @@
+db:
+  image: postgres
+  volumes_from:
+    - pg_data
+pg_data:
+  image: pg_data
